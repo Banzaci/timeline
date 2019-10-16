@@ -3,10 +3,16 @@ import { TIMELINE } from './types';
 function getFakeData(){
 	return new Promise((resolve) => {
 		setTimeout(() => {
-			resolve([{
-        id: 1,
-        timeline: [],
-      }]);
+			resolve([
+        {
+          id: 1,
+          name: 'Booked'
+        },
+        {
+          id: 2,
+          name: 'Visa'
+        }
+      ]);
 		}, 1000);
 	});
 }

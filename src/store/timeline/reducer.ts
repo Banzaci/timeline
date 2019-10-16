@@ -16,7 +16,6 @@ export default function message(state = initialState, action: any) {
 			return [
 				...state,
 				{
-					id: Date.now(),
 					timeline: action.payload,
 					completed: true,
 				},
