@@ -1,15 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import TimeLine from "../timeline";
 import useTimeline from '../../hooks/timeline'
 
-let a = true
+let a = 0
 const App: React.FC = () => {
   const { timeline, fetchItems } = useTimeline();
-  if(a) {
-    const v = fetchItems()
-    console.log(v)
-    a = false
-  }
+  useEffect(() => {
+    fetchItems()
+  }, []);
+  
   console.log('timeline', timeline)
   return (
     <TimeLine />
