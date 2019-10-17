@@ -1,10 +1,17 @@
 import React from 'react';
+import { Block } from './style'
 
-const Timeline: React.FC = () => {
+export interface ITLProps {
+  id:number,
+  key:number,
+  name:string
+}
+
+const Timeline: React.FC<ITLProps> = ({ id, name }:ITLProps) => {
   return (
-    <div>
-      Timeline
-    </div>
+    <Block>
+      { name }
+    </Block>
   );
 }
 

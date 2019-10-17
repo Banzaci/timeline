@@ -20,7 +20,7 @@ export default function Provider({ children } : { children: React.ReactNode}) {
 	
 	return (
 		<Store.Provider value={{ state, dispatch }}>
-			{children}
+			{ children }
 		</Store.Provider>
 	);
 }

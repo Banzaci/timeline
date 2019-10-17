@@ -11,6 +11,10 @@ function getFakeData(){
         {
           id: 2,
           name: 'Visa'
+				},
+				{
+          id: 3,
+          name: 'Resa'
         }
       ]);
 		}, 1000);
@@ -24,6 +28,7 @@ function fetching(){
 }
 
 function success(data: any) {
+	console.log(data)
 	return {
 		type: TIMELINE.SUCCESS,
 		payload: data
@@ -43,7 +48,6 @@ export function fetchItems(){
 		try {
       await getFakeData()
         .then( data => {
-          console.log(data)
           dispatch(success(data));
         });
 		} catch (error) {

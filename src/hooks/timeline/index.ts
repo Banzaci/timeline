@@ -13,8 +13,8 @@ const useTimeline: any = () => {
 	const timelineActions = bindActions({
 		fetchItems,
 	}, dispatch);
-
-	return { timeline, ...timelineActions };
+	console.log(timeline)
+	return { data: timeline, ...timelineActions };
 }
 
 export default useTimeline;

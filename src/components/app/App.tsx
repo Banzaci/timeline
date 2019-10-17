@@ -1,18 +1,33 @@
 import React, { useEffect } from 'react';
-import TimeLine from "../timeline";
+import TimeLine, { ITLProps } from '../timeline';
 import useTimeline from '../../hooks/timeline'
 
-let a = 0
+const renderTimeBox = (data:any) => {
+  return ((data || {}).timeline) || []
+}
+
 const App: React.FC = () => {
-  const { timeline, fetchItems } = useTimeline();
+  const { data, fetchItems } = useTimeline();
+
   useEffect(() => {
     fetchItems()
   }, []);
-  
-  console.log('timeline', timeline)
+
   return (
-    <TimeLine />
+    <div>
+      {
+        renderTimeBox(data[0]).map(({ id, name }:ITLProps, index:number) =>
+          <TimeLine
+            id={ id }
+            name={ name }
+            key={ index }
+          />
+        )
+      }
+    </div>
   );
 }
 
 export default App;
+// TL example: https://www.florin-pop.com/blog/2019/04/how-to-create-a-timeline-with-react/
+// https://github.com/bexic/react-without-redux/tree/master/src
