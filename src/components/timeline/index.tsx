@@ -1,18 +1,29 @@
 import React from 'react';
-import { Block } from './style'
+import moment from 'moment';
 
-export interface ITLProps {
+import { TimelineItem, TimelineItemContent, Circle, Title, Paragraph, Href, Date } from './style';
+
+export interface IItem {
   id:number,
   key:number,
-  name:string
+  name:string,
+  desc: string,
+  link?: any,
+  date?: Date
 }
 
-const Timeline: React.FC<ITLProps> = ({ id, name }:ITLProps) => {
+const Item: React.FC<IItem> = ({ id, name, desc, link, date }:IItem) => {
   return (
-    <Block>
-      { name }
-    </Block>
+    <TimelineItem>
+      <TimelineItemContent>
+        { date && <Date>{ date }</Date> }
+        <Title>{ name }</Title>
+        <Paragraph>{ desc }</Paragraph>
+        { link && <Href href={ link.href }>{ link.text }</Href> }
+        <Circle />
+      </TimelineItemContent>
+    </TimelineItem>
   );
 }
 
-export default Timeline;
+export default Item;

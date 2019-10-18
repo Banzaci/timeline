@@ -1,7 +1,7 @@
 export interface ITIMELINE {
 	[index: number]: {
 		id: number;
-		timeline: [];
+		timeline: [object];
 	}
 }
 

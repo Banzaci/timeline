@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
-import TimeLine, { ITLProps } from '../timeline';
-import useTimeline from '../../hooks/timeline'
+import TimeLine, { IItem } from '../timeline';
+import useTimeline from '../../hooks/timeline';
+import { Container } from './style'
 
 const renderTimeBox = (data:any) => {
   return ((data || {}).timeline) || []
@@ -14,17 +15,21 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <div>
+    <Container>
       {
-        renderTimeBox(data[0]).map(({ id, name }:ITLProps, index:number) =>
+        renderTimeBox(data[0])
+          .map(({ id, name, desc, link, date }:IItem, index:number) =>
           <TimeLine
+            date={ date }
             id={ id }
             name={ name }
             key={ index }
+            desc={ desc }
+            link={ link }
           />
         )
       }
-    </div>
+    </Container>
   );
 }
 

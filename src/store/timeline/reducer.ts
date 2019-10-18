@@ -2,7 +2,7 @@ import { TIMELINE, ITIMELINE } from './types';
 
 export const initialState: ITIMELINE[] = [];
 
-export default function message(state = initialState, action: any) {
+export default function timeline(state = initialState, action: any) {
 	switch (action.type) {
 		case TIMELINE.FETCH: {
 			return [
