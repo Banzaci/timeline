@@ -1,12 +1,13 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
+import { PADDING_NORMAL } from '../../shared/style';
 
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
-  margin: 40px auto;
+  margin: 10px auto 40px;
   max-width: 900px;
-  padding: 0 12px;
+  padding: 0 ${PADDING_NORMAL};
 
   &:after {
     background-color: #0074ab;

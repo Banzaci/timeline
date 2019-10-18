@@ -18,14 +18,10 @@ const App: React.FC = () => {
     <Container>
       {
         renderTimeBox(data[0])
-          .map(({ id, name, desc, link, date }:IItem, index:number) =>
+          .map((props:IItem, index:number) =>
           <TimeLine
-            date={ date }
-            id={ id }
-            name={ name }
+            { ...props }
             key={ index }
-            desc={ desc }
-            link={ link }
           />
         )
       }
