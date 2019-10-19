@@ -5,9 +5,8 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
-  margin: 10px auto 40px;
-  max-width: 900px;
   padding: 0 ${PADDING_NORMAL};
+  margin: 20px 0;
 
   &:after {
     background-color: #0074ab;
@@ -18,3 +17,8 @@ export const Container = styled.div`
     height: 100%;
   }
 `;
+
+export const Wrapper = styled.div`
+  margin: 10px auto;
+  max-width: 900px;
+`

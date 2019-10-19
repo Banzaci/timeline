@@ -16,7 +16,7 @@ export default function timeline(state = initialState, action: any) {
 			return [
 				...state,
 				{
-					timeline: action.payload,
+					...action.payload,
 					completed: true,
 				},
 			];

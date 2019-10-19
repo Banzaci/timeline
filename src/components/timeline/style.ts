@@ -1,15 +1,15 @@
 import styled from 'styled-components';
 import { PADDING_NORMAL } from '../../shared/style';
-import { COLOR_BLUE, COLOR_GREY } from '../../shared/colors';
+import { COLOR_BLUE, COLOR_LIGHT_GREEN, COLOR_LIGHT_RED } from '../../shared/colors';
 
 interface ITimelineItem {
   task?: any;
 }
 
 const taskHandler = ( task:any ):string => {
-  return (!task && 'white') ||
-  ((task && task.completed) && '#5fba7d') ||
-  ((task && !task.completed) && 'red')
+  if(task && task.completed) return COLOR_LIGHT_GREEN;
+  if(task && !task.completed) return COLOR_LIGHT_RED;
+  return 'white';
 }
 
 export const TimelineItemContent = styled.div<ITimelineItem>`
@@ -22,7 +22,7 @@ export const TimelineItemContent = styled.div<ITimelineItem>`
   align-items: flex-end;
   padding: 15px;
   position: relative;
-  width: 380px;
+  max-width: 380px;
   text-align: right;
   min-height: 80px;
 
@@ -60,17 +60,6 @@ export const Title = styled.h2`
   color: #092A6B;
 `;
 
-export const Paragraph = styled.p`
-  margin-top: ${PADDING_NORMAL};
-  font-size: .9em;
-`;
-
-export const Date = styled.time`
-  margin-bottom: 6px;
-  font-size: .8em;
-  color: ${COLOR_GREY}
-`;
-
 export const TimelineItem = styled.div`
   width: 400px;
   display: flex;
@@ -78,6 +67,10 @@ export const TimelineItem = styled.div`
   padding-right: 30px;
   position: relative;
   margin: ${PADDING_NORMAL} 0;
+
+  button {
+    align-self: flex-start;
+  }
 
   &:nth-child(odd) {
     align-self: flex-end;
@@ -93,6 +86,10 @@ export const TimelineItem = styled.div`
         right: auto;
         left: -7.5px;
         box-shadow: -1px 1px 1px rgba(0, 0, 0, 0.2);
+      }
+
+      button {
+        align-self: flex-end;
       }
     }
     ${Circle} {

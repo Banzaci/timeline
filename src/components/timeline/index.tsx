@@ -1,10 +1,12 @@
 import React from 'react';
 import moment from 'moment';
-import { MainLink } from '../../shared/buttons';
+import { MainLink, MainButton } from '../../shared/buttons';
+import { DATE_FORMAT } from '../../shared/misc';
 
 import 'moment/locale/sv'
 
-import { TimelineItem, TimelineItemContent, Circle, Title, Paragraph, Date } from './style';
+import { TimelineItem, TimelineItemContent, Circle, Title } from './style';
+import { Date, Paragraph } from '../../shared/elements';
 
 export interface IItem {
   id: number,
@@ -13,22 +15,21 @@ export interface IItem {
   desc: string,
   link?: any,
   task?: any,
-  date?: Date
+  date?: Date,
+  onTaskHandler: (id:number) => void
 }
 
-const DATE_FORMAT: string = 'DD MMMM YYYY';
 const LINK_STYLE: any = { marginTop: '12px'};
 
-const isTask = (task: any) => (task instanceof Object || false)
-const renderTask = () => <div>Task to do</div>
+const renderTask = (onTaskHandler: any, id:number) => <MainButton onClick={ () => onTaskHandler(id) }>Avklarad</MainButton>
 const renderDate = (date: Date) => <Date>{ moment(date).format(DATE_FORMAT) }</Date>
 const renderLink = ({ href, text }: { href:string, text:string }) => <MainLink href={ href } style={ LINK_STYLE }>{ text }</MainLink>
 
-const Item: React.FC<IItem> = ({ name, desc, link, date, task }:IItem) => {
+const Item: React.FC<IItem> = ({ id, name, desc, link, date, task, onTaskHandler }:IItem) => {
   return (
     <TimelineItem>
       <TimelineItemContent task={ task }>
-        { task && !task.completed && renderTask() }
+        { task && !task.completed && renderTask(onTaskHandler, id) }
         { date && renderDate(date) }
         <Title>{ name }</Title>
         <Paragraph>{ desc }</Paragraph>

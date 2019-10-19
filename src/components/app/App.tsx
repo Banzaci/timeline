@@ -1,11 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import TimeLine, { IItem } from '../timeline';
 import useTimeline from '../../hooks/timeline';
-import { Container } from './style'
+import Header from '../header'
+import { Container, Wrapper } from './style'
 
-const renderTimeBox = (data:any) => {
-  return ((data || {}).timeline) || []
-}
+const getTimeLineData = (data:any) => ((data || {}).timeline) || [];
+const getBookingDateData = (data:any) => ((data || {}).booked) || {};
+const getDepartureDateData = (data:any) => ((data || {}).departure) || {};
 
 const App: React.FC = () => {
   const { data, fetchItems } = useTimeline();
@@ -14,18 +15,30 @@ const App: React.FC = () => {
     fetchItems()
   }, []);
 
+  const onTaskHandler = (id:number) => {
+    console.log(id)
+  }
+
+  const booked = getBookingDateData(data[0]);
+  const departure = getDepartureDateData(data[0]);
+
   return (
-    <Container>
+    <Wrapper>
+      { booked && <Header { ...booked }/> }
+      <Container>
       {
-        renderTimeBox(data[0])
+        getTimeLineData(data[0])
           .map((props:IItem, index:number) =>
-          <TimeLine
-            { ...props }
-            key={ index }
-          />
-        )
+            <TimeLine
+              { ...props }
+              onTaskHandler={ onTaskHandler }
+              key={ index }
+            />
+          )
       }
-    </Container>
+      </Container>
+      { departure && <Header { ...departure }/> }
+    </Wrapper>
   );
 }
 
