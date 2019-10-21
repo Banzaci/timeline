@@ -1,15 +1,30 @@
 import React, { useEffect, useState } from 'react';
+import { useQuery } from '@apollo/react-hooks';
+import { gql } from 'apollo-boost';
 import TimeLine, { IItem } from '../timeline';
 import useTimeline from '../../hooks/timeline';
 import Header from '../header'
-import { Container, Wrapper } from './style'
+import { Container, Wrapper } from './style';
 
 const getTimeLineData = (data:any) => ((data || {}).timeline) || [];
 const getBookingDateData = (data:any) => ((data || {}).booked) || {};
 const getDepartureDateData = (data:any) => ((data || {}).departure) || {};
 
+const EXCHANGE_RATES = gql`
+  {
+    person(id: 1) {
+        name
+        homeworld
+    }
+}
+`;
+
 const App: React.FC = () => {
   const { data, fetchItems } = useTimeline();
+
+  const testing = useQuery(EXCHANGE_RATES);
+
+  console.log(testing)
 
   useEffect(() => {
     fetchItems()
