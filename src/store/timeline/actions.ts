@@ -1,6 +1,11 @@
 import axios from 'axios';
+import { useQuery } from '@apollo/react-hooks';
 import ApolloClient, { gql } from 'apollo-boost';
 import { TIMELINE } from './types';
+
+const client = new ApolloClient({
+	uri: 'http://localhost:4000/graphql',
+});
 
 async function fetchData() {
 	const { data } = await axios.get('http://localhost:4000/api/timeline');
@@ -8,20 +13,27 @@ async function fetchData() {
 }
 
 async function gqlHandler() {
-	const client = new ApolloClient({
-		uri: 'http://localhost:4000/graphql',
-	});
-	client
+	return client
   	.query({
 			query: gql`
 				{
-					rates(currency: "USD") {
-						currency
+					timeLineById(userId: 1){
+						today,
+						booked {
+							name,
+							desc
+						},
+						timeline {
+							name,
+							desc,
+							task {
+								completed
+							}
+						}
 					}
 				}
 			`
   })
-  .then(result => console.log(result));
 }
 
 function fetching(){
@@ -48,10 +60,10 @@ export function fetchItems(){
   return async function (dispatch: any) {
 		dispatch(fetching());
 		try {
-			const { data } = await fetchData();
-      dispatch(success(data));
+			const { data } = await gqlHandler();
+      dispatch(success(data.timeLineById));
 		} catch (error) {
-			dispatch(failed(error.response.data));
+			dispatch(failed(error));
 		}
 	};
 }

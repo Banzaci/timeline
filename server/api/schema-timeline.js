@@ -6,23 +6,34 @@ const Timeline = gql`
     date: String,
     desc: String
   }
+  type Departure {
+    name: String,
+    date: String,
+    desc: String
+  }
   type Task {
-    complete: Boolean
+    completed: Boolean
+  }
+  type Link {
+    text: String,
+    href: String
   }
   type Timeline {
     id: Int,
     name: String,
     date: String,
     desc: String,
-    task: Task
+    task: Task,
+    link: Link
   }
-  type TimelineType {
+  type TimelineProps {
     today: String,
     booked: Booked,
+    departure: Departure,
     timeline: [Timeline]
   }
   type Query {
-    getTimelineByUserId(userId: Int): TimelineType
+    timeLineById(userId: Int): TimelineProps
   }
 `
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import moment from 'moment';
 import { MainLink, MainButton } from '../../shared/buttons';
 import { DATE_FORMAT } from '../../shared/misc';
@@ -21,15 +21,19 @@ export interface IItem {
 
 const LINK_STYLE: any = { marginTop: '12px'};
 
+const getTask = (task:any) => ((task || {}).completed) || [];
 const renderTask = (onTaskHandler: any, id:number) => <MainButton onClick={ () => onTaskHandler(id) }>Avklarad</MainButton>
 const renderDate = (date: Date) => <Date>{ moment(date).format(DATE_FORMAT) }</Date>
 const renderLink = ({ href, text }: { href:string, text:string }) => <MainLink href={ href } style={ LINK_STYLE }>{ text }</MainLink>
 
 const Item: React.FC<IItem> = ({ id, name, desc, link, date, task, onTaskHandler }:IItem) => {
+
+  const [ completed, setCompleted ] = useState( getTask(task) )
+  console.log(completed)
   return (
     <TimelineItem>
       <TimelineItemContent task={ task }>
-        { task && !task.completed && renderTask(onTaskHandler, id) }
+        { completed && !completed && renderTask(onTaskHandler, id) }
         { date && renderDate(date) }
         <Title>{ name }</Title>
         <Paragraph>{ desc }</Paragraph>

@@ -1,7 +1,7 @@
 import moment from 'moment';
 
-const bookedDate = moment().subtract(17,'d');
-const departureDate = moment().subtract(17,'d');
+const bookedDate = moment().subtract(17,'d').format('DD MMMM YYYY');
+const departureDate = moment().subtract(17,'d').format('DD MMMM YYYY');
 const today = moment(new Date()).format('DD MMMM YYYY');
 
 const mocked = [{
@@ -9,8 +9,8 @@ const mocked = [{
   today,
   booked: {
     id: 1,
-    name: 'Bookad',
-    date: bookedDate,
+    name: 'Din resa bokad',
+    date: today,
     desc: 'Grattis! Du har bokat din resa till Omar för två till hotell Desert Inn med avresa 12 mars 2020.',
     link: {
       text: 'Din resa',
@@ -20,7 +20,7 @@ const mocked = [{
   timeline: [
     {
       id: 2,
-      name: 'Vaccination',
+      name: 'Vaccinationer',
       desc: 'Du behöver vaccinera dig minst 3 veckor innan avresa till Omar.',
       task: {
         completed: false
@@ -29,7 +29,7 @@ const mocked = [{
     {
       id: 3,
       name: 'Betala resan',
-      date: moment().subtract(2,'d'),
+      date: moment().subtract(2,'d').format('DD MMMM YYYY'),
       desc: 'Senast dag för att betala din resa.',
       link: {
         text: 'Hitta din faktura här',
@@ -71,8 +71,7 @@ const mocked = [{
 
 const resolvers = {
   Query: {
-    getTimelineByUserId(_, { userId }, { dataSources }) {
-      console.log('userId', dataSources);
+    timeLineById(_, { userId }) {
       return mocked.find(({ id }) => id === userId);
     }
   }

@@ -6,7 +6,8 @@ import ApolloClient from 'apollo-boost';
 
 import './index.css';
 
-import App from './components/app/App';
+import App from './components/app';
+
 import * as serviceWorker from './serviceWorker';
 
 const client = new ApolloClient({
@@ -14,7 +15,7 @@ const client = new ApolloClient({
 });
 
 ReactDOM.render(
-  <ApolloProvider client={ client} >
+  <ApolloProvider client={ client } >
     <Provider>
       <App />
     </Provider>
@@ -26,4 +27,4 @@ ReactDOM.render(
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
 
-// https://frontarm.com/navi/en/guides/static-rendering/
+// https://itnext.io/server-side-rendering-with-react-redux-and-react-router-fa5b67d4965e

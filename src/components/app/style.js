@@ -22,3 +22,17 @@ export const Wrapper = styled.div`
   margin: 10px auto;
   max-width: 900px;
 `
+
+export const Loader = styled.div`
+  margin: 10px auto;
+  max-width: 200px;
+  text-align: center;
+  background-color: white;
+`;
+
+export const Error = styled.div`
+  margin: 10px auto;
+  max-width: 200px;
+  text-align: center;
+  background-color: white;
+`;

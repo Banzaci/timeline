@@ -21,7 +21,7 @@ const LINK_STYLE: any = { marginTop: '12px'};
 
 const renderLink = ({ href, text }: { href:string, text:string }) => <MainLink href={ href } style={ LINK_STYLE }>{ text }</MainLink>
 
-const Header: React.FC<IHeader> = ({ id, name, desc, link, date }:IHeader) => {
+const Header: React.FC<IHeader> = ({ name, desc, link, date }:IHeader) => {
   return (
     <Container>
       <Date>{ moment(date).format(DATE_FORMAT) }</Date>
