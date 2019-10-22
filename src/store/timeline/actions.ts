@@ -1,5 +1,4 @@
-import axios from 'axios';
-import { useQuery } from '@apollo/react-hooks';
+// import axios from 'axios';
 import ApolloClient, { gql } from 'apollo-boost';
 import { TIMELINE } from './types';
 
@@ -7,10 +6,10 @@ const client = new ApolloClient({
 	uri: 'http://localhost:4000/graphql',
 });
 
-async function fetchData() {
-	const { data } = await axios.get('http://localhost:4000/api/timeline');
-	return data;
-}
+// async function fetchData() {
+// 	const { data } = await axios.get('http://localhost:4000/api/timeline');
+// 	return data;
+// }
 
 async function gqlHandler() {
 	return client

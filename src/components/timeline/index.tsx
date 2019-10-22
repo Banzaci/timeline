@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import moment from 'moment';
-import { MainLink, MainButton } from '../../shared/buttons';
-import { DATE_FORMAT } from '../../shared/misc';
+import React, { useState, useEffect } from 'react';
+import { TweenLite, Linear } from 'gsap';
+
+import { MainLink, CompleteButton } from '../../shared/buttons';
 
 import 'moment/locale/sv'
 
@@ -10,6 +10,7 @@ import { Date, Paragraph } from '../../shared/elements';
 
 export interface IItem {
   id: number,
+  index: number,
   key: number,
   name: string,
   desc: string,
@@ -21,25 +22,37 @@ export interface IItem {
 
 const LINK_STYLE: any = { marginTop: '12px'};
 
-const getTask = (task:any) => ((task || {}).completed) || [];
-const renderTask = (onTaskHandler: any, id:number) => <MainButton onClick={ () => onTaskHandler(id) }>Avklarad</MainButton>
-const renderDate = (date: Date) => <Date>{ moment(date).format(DATE_FORMAT) }</Date>
+const getTask = (task:any) => task && task.completed;
 const renderLink = ({ href, text }: { href:string, text:string }) => <MainLink href={ href } style={ LINK_STYLE }>{ text }</MainLink>
 
-const Item: React.FC<IItem> = ({ id, name, desc, link, date, task, onTaskHandler }:IItem) => {
+const Item: React.FC<IItem> = ({ id, name, desc, link, date, task, onTaskHandler, index }:IItem) => {
 
-  const [ completed, setCompleted ] = useState( getTask(task) )
-  console.log(completed)
+  const [ completed, setCompleted ] = useState( getTask(task) );
+
+  const card = React.createRef<HTMLDivElement>();
+
+  const onClick = () => {
+    setCompleted(1)
+    onTaskHandler(id);
+    TweenLite.to( card.current, .3, { rotationX: '+=360', ease: Linear.ease} );
+  }
+
+  useEffect(() => {
+    TweenLite.delayedCall( .2 + (index * .2) * .5, () => {
+      TweenLite.to( card.current, .8, { opacity: '1', ease: Linear.ease } );
+    });
+  }, [])
+
   return (
     <TimelineItem>
-      <TimelineItemContent task={ task }>
-        { completed && !completed && renderTask(onTaskHandler, id) }
-        { date && renderDate(date) }
+      <TimelineItemContent completed={ completed } ref={ card }>
+        { !completed && <CompleteButton onClick={ () => onClick() }>Fixat</CompleteButton> }
+        { date && <Date>{date}</Date> }
         <Title>{ name }</Title>
         <Paragraph>{ desc }</Paragraph>
         { link && renderLink(link)}
-        <Circle />
       </TimelineItemContent>
+      <Circle />
     </TimelineItem>
   );
 }

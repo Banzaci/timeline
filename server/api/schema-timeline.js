@@ -4,7 +4,8 @@ const Timeline = gql`
   type Booked {
     name: String,
     date: String,
-    desc: String
+    desc: String,
+    link: Link
   }
   type Departure {
     name: String,
@@ -12,7 +13,7 @@ const Timeline = gql`
     desc: String
   }
   type Task {
-    completed: Boolean
+    completed: Int
   }
   type Link {
     text: String,

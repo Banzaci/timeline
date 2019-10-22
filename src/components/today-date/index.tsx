@@ -1,21 +1,15 @@
 import React from 'react';
+import useTimeline from '../../hooks/timeline';
 import { Wrapper } from './style';
 
-type TimelineProps = {
-  timeline:object[],
-}
-
-const Nav: React.FC<TimelineProps> = ({ timeline }: TimelineProps) => {
-
-  console.log('Nav props', timeline)
-
+const Side: React.FC = () => {
   return (
     <Wrapper>
-      Nav
+      Today
     </Wrapper>
   );
 }
 
-export default Nav;
+export default Side;
 // TL example: https://www.florin-pop.com/blog/2019/04/how-to-create-a-timeline-with-react/
 // https://github.com/bexic/react-without-redux/tree/master/src

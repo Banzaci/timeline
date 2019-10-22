@@ -24,10 +24,7 @@ export const Wrapper = styled.div`
 `
 
 export const Loader = styled.div`
-  margin: 10px auto;
-  max-width: 200px;
-  text-align: center;
-  background-color: white;
+  display:none;
 `;
 
 export const Error = styled.div`

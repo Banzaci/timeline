@@ -12,9 +12,14 @@ export const TIMELINE = gql`
     booked {
       name,
       desc,
-      date
+      date,
+      link {
+        text,
+        href
+      }
     },
     timeline {
+      id,
       name,
       desc,
       date,

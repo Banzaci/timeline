@@ -32,10 +32,12 @@ export const MainLink = styled(Link)`
   color: ${ COLOR_BLUE };
 `;
 
-export const MainButton = styled(Button)`
+export const CompleteButton = styled(Button)`
+  position: absolute;
   color: ${ COLOR_BLUE };
   background: none;
   border: none;
   outline: none;
   cursor: pointer;
 `;
+

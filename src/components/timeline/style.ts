@@ -3,24 +3,25 @@ import { PADDING_NORMAL } from '../../shared/style';
 import { COLOR_BLUE, COLOR_LIGHT_GREEN, COLOR_LIGHT_RED } from '../../shared/colors';
 
 interface ITimelineItem {
-  task?: any;
+  completed?: number;
 }
 
-const taskHandler = ( task:any ):string => {
-  if(task && task.completed) return COLOR_LIGHT_GREEN;
-  if(task && !task.completed) return COLOR_LIGHT_RED;
+const taskHandler = ( completed:number = 0 ):string => {
+  if(completed === 1) return COLOR_LIGHT_GREEN;
+  if(completed === 0) return COLOR_LIGHT_RED;
   return 'white';
 }
 
 export const TimelineItemContent = styled.div<ITimelineItem>`
-  background:${({ task }) => taskHandler(task) };
+  opacity: 0;
+  background:${({ completed }) => taskHandler(completed) };
   box-shadow: 0 0 3px rgba(0,0,0,.3);
   border-radius: ${PADDING_NORMAL};
   padding: ${PADDING_NORMAL};
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  padding: 15px;
+  padding: 12px;
   position: relative;
   max-width: 380px;
   text-align: right;
@@ -32,7 +33,7 @@ export const TimelineItemContent = styled.div<ITimelineItem>`
 
   &:after {
     content: ' ';
-    background:${({ task }) => taskHandler(task) };
+    background:${({ completed }) => taskHandler(completed) };
     box-shadow: 1px -1px 1px rgba(0, 0, 0, 0.2);
     position: absolute;
     right: -7.5px;
@@ -49,7 +50,7 @@ export const Circle = styled.span`
   border-radius: 50%;
   position: absolute;
   top: calc(50% - 10px);
-  right: -78px;
+  right: -48px;
   width: 20px;
   height: 20px;
   z-index: 100;
@@ -69,7 +70,7 @@ export const TimelineItem = styled.div`
   margin: ${PADDING_NORMAL} 0;
 
   button {
-    align-self: flex-start;
+    left: 6px;
   }
 
   &:nth-child(odd) {
@@ -89,12 +90,13 @@ export const TimelineItem = styled.div`
       }
 
       button {
-        align-self: flex-end;
+        right: 6px;
+        left: auto;
       }
     }
     ${Circle} {
       right: auto;
-      left: -78px;
+      left: -48px;
     }
   }
 `;
