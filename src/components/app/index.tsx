@@ -4,11 +4,6 @@ import TimeLine, { IItem } from '../timeline';
 import Header from '../header'
 import { Container, Wrapper, Loader, Error } from './style';
 import { TIMELINE } from './query';
-import TaskCompleted from '../task-completed';
-import TodayDate from '../today-date';
-// const [getTimeline, { loading, data }] = useLazyQuery(TIMELINE); //Load on button click
-// refetch
-// if (networkStatus === 4) return <p>Refetching!</p>;
 
 const App: React.FC = () => {
   const { loading, error, data } = useQuery(TIMELINE, { notifyOnNetworkStatusChange: true });
@@ -29,19 +24,9 @@ const App: React.FC = () => {
     ])
   }
 
-  const appendTodayDate = (props:IItem, today: Date) => {
-    const { date } = props;
-    if (date && today < date) {
-      console.log(date, today)
-      return (<TodayDate />)
-    }
-    return null;
-  }
-
-  const renderTimeLineItems = () => timeline// { appendTodayDate(props, today) }
+  const renderTimeLineItems = () => timeline
     .map((props:IItem, index:number) =>
       <Fragment key={ index }>
-        {/* { appendTodayDate(props, today) } */}
         <TimeLine
           { ...props }
           index={ index }
@@ -52,10 +37,6 @@ const App: React.FC = () => {
 
   return (
     <Wrapper>
-      <TaskCompleted
-        tasks={ tasks }
-        timeline={ timeline }
-      />
       { booked && <Header { ...booked } marginAnimation/> }
       <Container>{ renderTimeLineItems() }
       </Container>
