@@ -48,3 +48,4 @@ server.applyMiddleware({ app, path: '/graphql' });
 httpServer.listen({ port: 4000 }, () => console.log(`\n🚀GraphQL is now running on http://localhost:4000/graphql`));
 
 // launchctl load ~/Library/LaunchAgents/homebrew.mxcl.redis.plist
+// https://dev.to/aurelkurtula/playing-with-graphql-yoga-and-mongoose-f4f
